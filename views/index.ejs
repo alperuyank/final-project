@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="<%= res.locale %>">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+</head>
+<body>
+    <header>
+        <% if (!user) { %>
+            <a href="/auth/login"><%= __('Login') %></a>
+        <% } else { %>
+            <span><%= user.email %></span>
+            <a href="/auth/logout"><%= __('Logout') %></a>
+        <% } %>
+        <form method="get" action="/" id="language-switcher">
+            <label for="language-select"><%= __('Language') %>:</label>
+            <select name="lang" id="language-select" onchange="this.form.submit()">
+                <option value="en" <%= res.locale === 'en' ? 'selected' : '' %> >English</option>
+                <option value="tr" <%= res.locale === 'tr' ? 'selected' : '' %> >Türkçe</option>
+            </select>
+        </form>
+    </header>
+    <main>
+        <h1><%= __('Welcome to') %> <%= title %> <%= __('page') %>!</h1>
+        <div class="movie-slider">
+            <% movies.forEach(movie => { %>
+                <div class="movie">
+                    <img src="<%= movie.imageUrl %>" alt="<%= movie.title %>">
+                    <h2><%= movie.title %></h2>
+                    <p><%= movie.summary %></p>
+                    <p><%= __('IMDB') %>: <%= movie.rating %></p>
+                    <a href="<%= movie.trailerUrl %>"><%= __('Trailer') %></a>
+                </div>
+            <% }) %>
+        </div>
+    </main>
+    <script src="/js/search.js"></script>
+</body>
+</html>

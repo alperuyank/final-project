@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMDb-like Navbar</title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="../public/css/style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <div class="navbar-logo">
+                <img src="../public/img/logo.svg" alt="IMDb Logo">
+            </div>
+        </div>
+        <div class="navbar-middle">
+            <div class="navbar-menu">
+                <button class="menu-button">All</button>
+                <div class="dropdown">
+                    <a href="#">Titles</a>
+                    <a href="#">TV Episodes</a>
+                    <a href="#">Celebs</a>
+                    <a href="#">Companies</a>
+                    <a href="#">Keywords</a>
+                    <a href="#">Advanced Search</a>
+                </div>
+            </div>
+            <input type="text" class="navbar-search" placeholder="Search IMDb">
+            <button class="navbar-search-button">Search</button>
+        </div>
+        <div class="navbar-right">
+            <button class="navbar-pro">
+                <img src="../public/img/IMDbPro.png" alt="IMDb Logo">
+            </button>
+            <button class="navbar-watchlist">Watchlist</button>
+            <button class="navbar-signin">Sign In</button>
+            <select class="navbar-language">
+                <option value="en">EN</option>
+                <option value="tr">TR</option>
+                <!-- Add more languages as needed -->
+            </select>
+        </div>
+    </nav>
+
+    <div class="top-10-section">
+        <h2>Top 10 on IMDb this week</h2>
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide top-10-item">
+                    <img src="https://m.media-amazon.com/images/M/MV5BMjNiMDI5YjItNmU0Yy00NmYxLThjYmUtZDc5ODY2ZDI2NzkyXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_FMjpg_UY2222_.jpg"
+                        alt="3 Body Problem">
+                    <div class="info">
+                        <span class="rating">7.7</span>
+                        <span class="title">1. 3 Body Problem</span>
+                        <div class="buttons">
+                            <button class="watchlist-btn">+ Watchlist</button>
+                            <button class="trailer-btn">Trailer</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide top-10-item">
+                    <img src="https://m.media-amazon.com/images/M/MV5BMTdiOTdhNDQtNTJmMi00YTdkLThkYTAtODg0YTUxYjcxMjc3XkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_.jpg"
+                        alt="Shōgun">
+                    <div class="info">
+                        <span class="rating">9.1</span>
+                        <span class="title">2. Shōgun</span>
+                        <div class="buttons">
+                            <button class="watchlist-btn">+ Watchlist</button>
+                            <button class="trailer-btn">Trailer</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide top-10-item">
+                    <img src="https://m.media-amazon.com/images/M/MV5BY2QwOGE2NGQtMWQwNi00M2IzLThlNWItYWMzNGQ5YWNiZDA4XkEyXkFqcGdeQXVyNTE1NjY5Mg@@._V1_FMjpg_UX1000_.jpg"
+                        alt="Godzilla X Kong: The New Empire">
+                    <div class="info">
+                        <span class="rating">6.6</span>
+                        <span class="title">3. Godzilla X Kong: The New Empire</span>
+                        <div class="buttons">
+                            <button class="watchlist-btn">+ Watchlist</button>
+                            <button class="trailer-btn">Trailer</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide top-10-item">
+                    <img src="https://m.media-amazon.com/images/M/MV5BOGJjODQxYWUtYjlkOC00NzJiLTgyZjUtY2Q3Y2FhZGVlODEwXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg"
+                        alt="The Gentlemen">
+                    <div class="info">
+                        <span class="rating">8.2</span>
+                        <span class="title">4. The Gentlemen</span>
+                        <div class="buttons">
+                            <button class="watchlist-btn">+ Watchlist</button>
+                            <button class="trailer-btn">Trailer</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide top-10-item">
+                    <img src="https://image.tmdb.org/t/p/original/bvuVywFxiPhDgbHQl1CZ4kwGkPv.jpg" alt="Road House">
+                    <div class="info">
+                        <span class="rating">6.2</span>
+                        <span class="title">5. Road House</span>
+                        <div class="buttons">
+                            <button class="watchlist-btn">+ Watchlist</button>
+                            <button class="trailer-btn">Trailer</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide top-10-item">
+                    <img src="https://m.media-amazon.com/images/M/MV5BN2QyZGU4ZDctOWMzMy00NTc5LThlOGQtODhmNDI1NmY5YzAwXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_FMjpg_UX1000_.jpg"
+                        alt="Dune: Part Two">
+                    <div class="info">
+                        <span class="rating">8.8</span>
+                        <span class="title">6. Dune: Part Two</span>
+                        <div class="buttons">
+                            <button class="watchlist-btn">+ Watchlist</button>
+                            <button class="trailer-btn">Trailer</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more movie slides here -->
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+            <!-- Add Navigation -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <!-- Initialize Swiper -->
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 3,
+            spaceBetween: 10,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 2,
+                    spaceBetween: 10,
+                },
+                768: {
+                    slidesPerView: 3,
+                    spaceBetween: 20,
+                },
+                1024: {
+                    slidesPerView: 5,
+                    spaceBetween: 25,
+                },
+            }
+        });
+    </script>
+    <script src="../public/js/script.js"></script>
+
+</body>
+
+</html>
