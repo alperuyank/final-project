@@ -1,40 +1,62 @@
-<!DOCTYPE html>
-<html lang="<%= res.locale %>">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
-</head>
+<%-include('./partials/header.ejs')%>
 <body>
-    <header>
-        <% if (!user) { %>
-            <a href="/auth/login"><%= __('Login') %></a>
-        <% } else { %>
-            <span><%= user.email %></span>
-            <a href="/auth/logout"><%= __('Logout') %></a>
-        <% } %>
-        <form method="get" action="/" id="language-switcher">
-            <label for="language-select"><%= __('Language') %>:</label>
-            <select name="lang" id="language-select" onchange="this.form.submit()">
-                <option value="en" <%= res.locale === 'en' ? 'selected' : '' %> >English</option>
-                <option value="tr" <%= res.locale === 'tr' ? 'selected' : '' %> >Türkçe</option>
-            </select>
-        </form>
-    </header>
-    <main>
-        <h1><%= __('Welcome to') %> <%= title %> <%= __('page') %>!</h1>
-        <div class="movie-slider">
-            <% movies.forEach(movie => { %>
-                <div class="movie">
-                    <img src="<%= movie.imageUrl %>" alt="<%= movie.title %>">
-                    <h2><%= movie.title %></h2>
-                    <p><%= movie.summary %></p>
-                    <p><%= __('IMDB') %>: <%= movie.rating %></p>
-                    <a href="<%= movie.trailerUrl %>"><%= __('Trailer') %></a>
+        <div class="top-10-section">
+            <h2>Top 10 on IMDb this week</h2>
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <% movies.forEach(movie => { %>
+                        <div class="swiper-slide top-10-item">
+                            <a href="/movie/<%= movie.movie_id %>">
+                                <img src="<%= movie.img_url %>" alt="<%= movie.movie_name %>">
+                            </a>
+                            <div class="info">
+                                <span class="title"><%= movie.movie_name %></span>
+                                <span class="rating"><%= movie.rating %></span>
+                                <div class="buttons">
+                                    <button class="watchlist-btn">+ Watchlist</button>
+                                    <button class="trailer-btn">Trailer</button>
+                                </div>
+                            </div>
+                        </div>
+                    <% }) %>
                 </div>
-            <% }) %>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+            <!-- Add Navigation -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
         </div>
-    </main>
-    <script src="/js/search.js"></script>
+    </div>
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <!-- Initialize Swiper -->
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 3,
+            spaceBetween: 10,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                768: {
+                    slidesPerView: 3,
+                    spaceBetween: 20,
+                },
+                1024: {
+                    slidesPerView: 4,
+                    spaceBetween: 25,
+                },
+                1440: {
+                    slidesPerView: 6,
+                    spaceBetween: 30,
+                }
+            }
+        });
+    </script>
+    <script src="./js/script.js"></script>
 </body>
-</html>

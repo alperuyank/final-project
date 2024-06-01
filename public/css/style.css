@@ -2,6 +2,7 @@ body {
   margin: 0;
   background-color: #000;
   font-family: Arial, sans-serif;
+  overflow-x: hidden;
 }
 
 .navbar {
@@ -19,9 +20,11 @@ body {
 .navbar-right {
   display: flex;
   align-items: center;
+
 }
 
 .navbar-logo img {
+  margin: 0px 10px;
   height: 30px;
 }
 
@@ -47,7 +50,7 @@ body {
   border-radius: 5px;
   top: 40px;
   width: 200px;
-  z-index: 1;
+  z-index: 20;
 }
 
 .navbar-middle .dropdown a {
@@ -90,7 +93,7 @@ body {
 }
 
 .navbar-right .navbar-language {
-  margin-left: 10px;
+  margin: 0 10px;
   padding: 5px;
   color: #fff;
   background: none;
@@ -115,26 +118,41 @@ body {
   padding-left: 10px;
 }
 
-.slider-container {
+.swiper-container {
+  width: 100%;
+  height: calc(100vh - 40px);
+  /* Adjust height to match navbar height */
+  padding: 20px 0;
+}
+
+.swiper-wrapper {
+  height: 100%;
+}
+
+.swiper-slide {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 20px 0;
-}
-.slider-button {
-  background-color: #f0c14b;
-  border: 1px solid #a88734;
-  border-radius: 3px;
+  background-color: #1a1a1a;
   padding: 10px;
-  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+  box-sizing: border-box;
 }
+
+.swiper-slide img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
 .top-10-grid {
   display: flex;
-  flex-wrap: nowrap;
-  overflow: hidden; /* Yatay kaydırma scrollunu gizlemek için */
+  flex-wrap: wrap;
   gap: 20px;
-  padding: 20px;
-  scroll-behavior: smooth;
+  justify-content: center;
 }
 
 .top-10-item {
@@ -142,6 +160,7 @@ body {
   padding: 10px;
   border-radius: 5px;
   width: 200px;
+  height: 450px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -156,14 +175,14 @@ body {
 }
 
 .info {
-  margin-top: 10px;
+  margin: 10%;
 }
 
 .rating {
   display: block;
   color: #ffc107;
   font-size: 18px;
-  margin-bottom: 5px;
+  margin-top: 5px;
 }
 
 .title {
@@ -179,7 +198,8 @@ body {
   justify-content: space-between;
 }
 
-.watchlist-btn, .trailer-btn {
+.watchlist-btn,
+.trailer-btn {
   background-color: #333;
   border: none;
   color: #fff;
@@ -190,7 +210,137 @@ body {
 }
 
 
+/*MOIVE-Details CSS*/
+
+.movie-detail {
+  width: 80%;
+  margin: 0 auto;
+  padding-top: 20px;
+}
+
+.movie-header {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap */
+  align-items: flex-start;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 20px;
+}
+
+.movie-header img {
+  max-width: 400px;
+  margin-right: 20px;
+}
+
+.movie-header .info {
+  max-width: 600px;
+  flex: 1; /* Allow info to take remaining space */
+}
+
+.movie-header .info h1 {
+  margin: 0;
+  font-size: 2em;
+  color:#fff;
+}
+
+.movie-header .info p {
+  margin: 5px 0;
+  color:#fff;
+}
+
+.movie-header .info .rating {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  color:#fff;
+}
+
+.movie-header .info .rating span {
+  margin-right: 10px;
+}
+
+.movie-header .info .buttons {
+  margin-top: 20px;
+}
+
+.movie-header .info .buttons button {
+  padding: 10px 20px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
 /* Responsive styles */
+@media (max-width: 375px) {
+  .navbar-middle {
+    flex-direction: row;
+  }
+
+  .navbar-search {
+    width: 75%;
+  }
+
+  .navbar-left,
+  .navbar-right {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .navbar-right {
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+
+  .navbar {
+    justify-content: center;
+  }
+
+  .navbar-logo img {
+    height: 20px;
+    margin: 2px;
+  }
+
+  .navbar-pro img {
+    height: 20px;
+  }
+
+  .top-10-grid {
+    flex-direction: column;
+    align-items: center;
+    height: 100px;
+  }
+
+  .watchlist-btn,
+  .trailer-btn {
+    width: 50%;
+  }
+
+  .slider-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .slider-button {
+    background-color: #f0c14b;
+    border: 1px solid #a88734;
+    cursor: pointer;
+  }
+
+  .movie-detail {
+    width: 100%;
+}
+
+.movie-header .info h1 {
+    font-size: 1.25em;
+}
+
+.movie-header .info .buttons button {
+    padding: 6px 12px;
+    margin: 5px 0; /* Stack buttons vertically */
+}
+
+}
+
 @media (max-width: 768px) {
   .navbar-middle {
     flex-direction: row;
@@ -222,3 +372,56 @@ body {
 
   .navbar-pro img {
     height: 20px;
+  }
+
+  .top-10-grid {
+    flex-direction: column;
+    align-items: center;
+    height: 200px;
+  }
+
+  .slider-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .slider-button {
+    background-color: #f0c14b;
+    border: 1px solid #a88734;
+
+    cursor: pointer;
+  }
+
+  .movie-header .info h1 {
+    font-size: 1.5em;
+}
+
+.movie-header .info .buttons button {
+    padding: 8px 16px;
+}
+
+}
+@media (max-width: 1024px) {
+  .movie-detail {
+      width: 95%;
+  }
+
+  .movie-header {
+      flex-direction: column; /* Stack items vertically */
+      align-items: center; /* Center items */
+      text-align: center; /* Center text */
+  }
+
+  .movie-header img {
+      margin-right: 0;
+  }
+
+  .movie-header .info {
+      max-width: 100%;
+  }
+
+  .movie-header .info h1 {
+      font-size: 1.75em;
+  }
+}

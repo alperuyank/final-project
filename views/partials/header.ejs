@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMDb-like Navbar</title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <div class="navbar-logo">
+                <img src="/img/logo.svg" alt="IMDb Logo">
+            </div>
+        </div>
+        <div class="navbar-middle">
+            <div class="navbar-menu">
+                <button class="menu-button">All</button>
+                <div class="dropdown">
+                    <a href="#">Titles</a>
+                    <a href="#">TV Episodes</a>
+                    <a href="#">Celebs</a>
+                    <a href="#">Companies</a>
+                    <a href="#">Keywords</a>
+                    <a href="#">Advanced Search</a>
+                </div>
+            </div>
+            <input type="text" class="navbar-search" placeholder="Search IMDb">
+            <button class="navbar-search-button">Search</button>
+        </div>
+        <div class="navbar-right">
+            <button class="navbar-pro">
+                <img src="/img/IMDbPro.png" alt="IMDbPro Logo">
+            </button>
+            <button class="navbar-watchlist">Watchlist</button>
+            <% if (!user) { %>
+                <a href="/login"><button class="navbar-signin">Sign In</button></a>
+            <% } else { %>
+                <% if (user) { %>
+                    <form action="/logout" method="POST">
+                        <button type="submit" class="navbar-signin">Sign Out</button>
+                    </form>
+                <% } %>                
+            <% } %>
+            <select class="navbar-language">
+                <option value="en">EN</option>
+                <option value="tr">TR</option>
+                <!-- Add more languages as needed -->
+            </select>
+        </div>
+    </nav>
