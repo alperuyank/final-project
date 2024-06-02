@@ -35,6 +35,7 @@ router.get('/movie/:id', async (req, res) => {
     }
 });
 
+
 // Render the login/registration page
 router.get('/login', (req, res) => {
     res.render('login');
@@ -84,5 +85,53 @@ router.get('/login', (req, res) => {
         res.redirect('/login');
     });
 });
+
+router.get('/search', async (req, res) => {
+  try {
+      const query = req.query.query ? req.query.query.toLowerCase() : '';
+      const type = req.query.type;
+      
+      console.log('Performing search with query:', query, 'and type:', type); // Debug log
+
+      // Base SQL query
+      let sql = 'SELECT * FROM movies WHERE LOWER(movie_name) LIKE $1';
+      let params = [`%${query}%`];
+
+      // Modify SQL query based on the search type
+      if (type && type !== 'all') {
+          switch (type) {
+              case 'genre':
+                  sql += ' AND genre = $2';
+                  params.push(query); // Pass the genre query
+                  break;
+              case 'director':
+                  sql += ' AND director = $2';
+                  params.push(query); // Pass the director query
+                  break;              
+                  case 'actor':
+                  sql += ' AND actors = $2';
+                  params.push(query); // Pass the actor query
+                  break;
+              default:
+                  break;
+          }
+      }
+
+      // Execute the SQL query
+      const result = await db.query(sql, params);
+      //console.log('Search results from backend:', result); // Debug log
+
+      
+      // Send the results as JSON
+      
+      res.json(result.rows);
+  } catch (err) {
+      console.error(err);
+      res.status(500).send('Internal Server Error');
+  }
+});
+
+
+
   
-  module.exports = router;
+module.exports = router;

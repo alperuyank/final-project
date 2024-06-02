@@ -2,8 +2,6 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
-const flash = require('connect-flash');
-const passport = require('passport');
 const i18n = require('i18n');
 const ejs = require('ejs');
 

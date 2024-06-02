@@ -7,29 +7,29 @@
     <title>IMDb-like Navbar</title>
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/search.js"></script>
+    <script src="/js/script.js"></script>
 </head>
 
 <body>
     <nav class="navbar">
         <div class="navbar-left">
-            <div class="navbar-logo">
+            <a href="/" class="navbar-logo">
                 <img src="/img/logo.svg" alt="IMDb Logo">
-            </div>
+            </a>
         </div>
         <div class="navbar-middle">
             <div class="navbar-menu">
                 <button class="menu-button">All</button>
                 <div class="dropdown">
-                    <a href="#">Titles</a>
-                    <a href="#">TV Episodes</a>
-                    <a href="#">Celebs</a>
-                    <a href="#">Companies</a>
-                    <a href="#">Keywords</a>
-                    <a href="#">Advanced Search</a>
+                    <a href="#" data-type="all">All</a>
+                    <a href="#" data-type="genre">Genre</a>
+                    <a href="#" data-type="actor">Actor</a>
+                    <a href="#" data-type="director">Director</a>
                 </div>
             </div>
-            <input type="text" class="navbar-search" placeholder="Search IMDb">
-            <button class="navbar-search-button">Search</button>
+            <input type="text" id="search-input" class="navbar-search" placeholder="Search IMDb">
+            <button class="navbar-search-button" id="search-button">Search</button>
         </div>
         <div class="navbar-right">
             <button class="navbar-pro">
@@ -38,17 +38,18 @@
             <button class="navbar-watchlist">Watchlist</button>
             <% if (!user) { %>
                 <a href="/login"><button class="navbar-signin">Sign In</button></a>
-            <% } else { %>
-                <% if (user) { %>
-                    <form action="/logout" method="POST">
-                        <button type="submit" class="navbar-signin">Sign Out</button>
-                    </form>
-                <% } %>                
-            <% } %>
-            <select class="navbar-language">
-                <option value="en">EN</option>
-                <option value="tr">TR</option>
-                <!-- Add more languages as needed -->
-            </select>
+                <% } else { %>
+                    <% if (user) { %>
+                        <form action="/logout" method="POST">
+                            <button type="submit" class="navbar-signin">Sign Out</button>
+                        </form>
+                        <% } %>
+                            <% } %>
+                                <select class="navbar-language">
+                                    <option value="en">EN</option>
+                                    <option value="tr">TR</option>
+                                    <!-- Add more languages as needed -->
+                                </select>
         </div>
+        <div id="search-results"></div>
     </nav>
