@@ -1,60 +1,55 @@
 <%-include('./partials/header.ejs')%>
 <body>
-        <div class="top-10-section">
-            <h2>Top 10 on IMDb this week</h2>
-            <div class="swiper-container">
-                <div class="swiper-wrapper">
-                    <% movies.forEach(movie => { %>
-                        <div class="swiper-slide top-10-item">
-                            <a href="/movie/<%= movie.movie_id %>">
-                                <img src="<%= movie.img_url %>" alt="<%= movie.movie_name %>">
-                            </a>
-                            <div class="info">
-                                <span class="title"><%= movie.movie_name %></span>
-                                <span class="rating"><%= movie.rating %></span>
-                                <div class="buttons">
-                                    <button class="watchlist-btn">+ Watchlist</button>
-                                    <button class="trailer-btn">Trailer</button>
-                                </div>
-                            </div>
+        
+    <div class="top-10-section">
+        <h2>Top 10 on IMDb this week</h2>
+        <div class="owl-carousel owl-theme">
+            <% movies.forEach(movie => { %>
+                <div class="item top-10-item">
+                    <a href="/movie/<%= movie.movie_id %>">
+                        <img src="<%= movie.img_url %>" alt="<%= movie.movie_name %>">
+                    </a>
+                    <div class="info">
+                        <a class="title" style="text-overflow: ellipsis;"><%= movie.movie_name %></a>
+                        <a class="rating"><%= movie.rating %></a>
+                        <div class="buttons">
+                            <button class="watchlist-btn">Watchlist</button>
+                            <button class="trailer-btn">Trailer</button>
                         </div>
-                    <% }) %>
+                    </div>
                 </div>
-            <!-- Add Pagination -->
-            <!-- Add Navigation -->
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
+            <% }) %>
         </div>
     </div>
-    <!-- Swiper JS -->
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <!-- Initialize Swiper -->
+    
     <script>
-        var swiper = new Swiper('.swiper-container', {
-            slidesPerView: 3,
-            spaceBetween: 10,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            breakpoints: {
-                768: {
-                    slidesPerView: 3,
-                    spaceBetween: 20,
-                },
-                1024: {
-                    slidesPerView: 4,
-                    spaceBetween: 25,
-                },
-                1440: {
-                    slidesPerView: 6,
-                    spaceBetween: 30,
-                }
+        $(document).ready(function(){
+          $(".owl-carousel").owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: true,
+            responsive: {
+              0: {
+                items: 2
+              },
+              576: {
+                items: 2
+              },
+              768: {
+                items: 3
+              },
+              1024: {
+                items: 4
+              },
+              1440: {
+                items: 6
+              },
+              2560: {
+                items: 8
+              }
             }
+          });
         });
-    </script>
+        </script>
+        
 </body>

@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <img src="${result.img_url}" alt="${result.movie_name}">
                             <div class="movie-info">
                                 <div class="title">${result.movie_name}</div>
-                                <div class="details">${result.year}<br>${result.actors}</div>
+                                <div class="details">${result.release_year}<br>${result.actors}</div>
                             </div>
                         </a>
                     `).join('');
@@ -56,5 +56,36 @@ document.addEventListener('DOMContentLoaded', () => {
     searchButton.addEventListener('click', (event) => {
         event.preventDefault();
         performSearch(searchInput.value, searchType);
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const searchButton = document.getElementById('search-button');
+    const searchInput = document.getElementById('search-input');
+    const dropdownLinks = document.querySelectorAll('.dropdown a');
+    let selectedType = 'all';
+
+    // Update the selected type based on dropdown click
+    dropdownLinks.forEach(link => {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+            selectedType = this.getAttribute('data-type');
+            document.querySelector('.menu-button').innerText = this.innerText;
+        });
+    });
+
+    // Handle search button click
+    searchButton.addEventListener('click', function() {
+        const query = searchInput.value.trim();
+        if (query) {
+            window.location.href = `/search-detail?query=${encodeURIComponent(query)}&type=${encodeURIComponent(selectedType)}`;
+        }
+    });
+
+    // Optionally, handle enter key press for the search input
+    searchInput.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            searchButton.click();
+        }
     });
 });

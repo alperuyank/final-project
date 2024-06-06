@@ -1,24 +1,38 @@
 <%- include('./partials/header.ejs') %>
-<body>
-    <div class="movie-detail">
-        <div class="movie-header">
-            <img src="<%= movie.img_url %>" alt="<%= movie.movie_name %>">
-            <div class="info">
-                <h1><%= movie.movie_name %></h1>
-                <p>Year: <%= movie.release_year %></p>
-                <p>Duration: <%= movie.movie_runtime %> Minutes</p>
-                <p>Genre: <%= movie.genre %></p>
-                <p>Actors: <%= movie.actors %></p>
-                <p>Summary: <%= movie.summary %></p>
-                <div class="rating">
-                    <span>IMDb Rating:</span>
-                    <span><%= movie.rating %></span>
-                </div>
-                <div class="buttons">
-                    <button class="watchlist-btn">+ Watchlist</button>
-                    <button class="trailer-btn" onclick="window.open('<%= movie.trailer_url %>', '_blank')">Trailer</button>
+
+    <body>
+        <div class="movie-detail">
+            <div class="movie-header">
+                <img src="<%= movie.img_url %>" alt="<%= movie.movie_name %>">
+                <div class="info">
+                    <h1>
+                        <%= movie.movie_name %>
+                    </h1>
+                    <p>Year: <%= movie.release_year %>
+                    </p>
+                    <p>Duration: <%= movie.movie_runtime %> Minutes</p>
+                    <p>Genre: <%= movie.genre %>
+                    </p>
+                    <p>Actors: <%= movie.actors %>
+                    </p>
+                    <p>Summary: <%= movie.summary %>
+                    </p>
+                    <div class="rating">
+                        <span>IMDb Rating:</span>
+                        <span>
+                            <%= movie.rating %>
+                        </span>
+                    </div>
+                    <div class="buttons">
+                        <button class="watchlist-btn">+ Watchlist</button>
+                        <% if (movie.trailer_url) { %>
+                            <button class="trailer-btn"
+                                onclick="window.open('<%= movie.trailer_url %>', '_blank')">Trailer</button>
+                            <% } else { %>
+                                <button class="trailer-btn" disabled>No Trailer Available</button>
+                                <% } %>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</body>
+    </body>

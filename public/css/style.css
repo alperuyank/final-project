@@ -157,6 +157,8 @@ body {
 
 .top-10-section {
   padding: 20px;
+  max-width: 1300px;
+  margin: 0 auto;
 }
 
 .top-10-section h2 {
@@ -168,18 +170,7 @@ body {
   padding-left: 10px;
 }
 
-.swiper-container {
-  width: 100%;
-  height: calc(100vh - 40px);
-  /* Adjust height to match navbar height */
-  padding: 20px 0;
-}
-
-.swiper-wrapper {
-  height: 100%;
-}
-
-.swiper-slide {
+.owl-carousel .item {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -191,27 +182,17 @@ body {
   box-sizing: border-box;
 }
 
-.swiper-slide img {
+.owl-carousel .item img {
   width: 100%;
   height: 300px;
   object-fit: cover;
   border-radius: 5px;
 }
 
-.top-10-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
-
 .top-10-item {
-  background-color: #1a1a1a;
-  padding: 10px;
-  border-radius: 5px;
-  width: 200px;
-  height: 450px;
-  text-align: center;
+  width: 100%;
+  max-width: 200px;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -219,7 +200,7 @@ body {
 
 .top-10-item img {
   width: 100%;
-  height: 300px;
+  height: auto;
   object-fit: cover;
   border-radius: 5px;
 }
@@ -229,22 +210,27 @@ body {
 }
 
 .rating {
-  display: block;
   color: #ffc107;
-  font-size: 18px;
+  font-size: 12px;
   margin-top: 5px;
 }
 
 .title {
   color: #fff;
   display: block;
-  font-size: 16px;
-  margin-bottom: 5px;
+  font-size: 14px;
+  margin-bottom: 1px;
+  overflow: hidden;
+  /* taşanları gizle */
+  white-space: nowrap;
+  /* alt satıra hiç inme */
+  text-overflow: ellipsis;
+  /* eğer uzunsa üç nokta koy */
 }
 
 .buttons {
   margin-top: 10px;
-  display: flex;
+  display:block;
   justify-content: space-between;
 }
 
@@ -256,7 +242,8 @@ body {
   padding: 5px;
   border-radius: 3px;
   cursor: pointer;
-  width: 48%;
+  width: 59%;
+  font-size: 14px;
 }
 
 

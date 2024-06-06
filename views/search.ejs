@@ -1,59 +1,89 @@
 <%-include('./partials/header.ejs')%>
-<style>
-body{
-    margin:0;
-}
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
+<title>Search Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #333;
+        }
+        .search-results {
+            width: 80%;
+            margin: 20px auto;
+            background-color: inherit;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 64px rgba(0,0,0,0.1);
+        }
+        .search-results h1 {
+            border-bottom: 2px solid #fff;
+            padding-bottom: 10px;
+            margin-bottom: 20px;color: #fff;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h3 {
+            display: flex;
+            align-items: center;
+            border-left: 5px solid #ffc107;
+            padding-left: 10px;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        .section h3 .exact-matches {
+            margin-left: auto;
+            font-size: 14px;
+            color: #007BFF;
+            cursor: pointer;
+        }
+        .result-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .result-item img {
+            min-width: 200px;
+            min-height: 400px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .result-item .info {
+            display: flex;
+            flex-direction: column;
+        }
+        .result-item .info .title {
+            font-size: 18px;
+            color: #fff;
+        }
+        .result-item .info .meta {
+            font-size: 14px;
+            color: #fff;
+        }
 
-h1 {
-    font-size: 24px;
-    color: #fff;
-    margin-bottom: 20px;
-    margin-left:36px;
-    margin-right:36px;
-}
-
-#search-results {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-    margin:0px 36px;
-}
-
-/* Bağlantı stilleri */
-a {
-    text-decoration: none;
-    color: #333;
-}
-
-a:hover {
-    color: #ff6600;
-}
-
-/* Resim stilleri */
-img {
-    max-width: 100%;
-    height: 100%;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out;
-}
-
-img:hover {
-    transform: scale(1.05);
-}
-</style>
+    </style>
+</head>
 <body>
-    <h1>Search Results</h1>
-    <div id="search-results">
-        <% results.forEach(result => { %>
-            <a href="movie/<%= result.movie_id %>">
-                <img src="<%= result.img_url %>" alt="<%= result.movie_name %>">
-            </a>
-        <% }); %>
+    <div class="search-results">
+        <h1>Search Results</h1>
+
+        <div id="search-results">
+            <div class="section" id="titles-section">
+                <h3>Titles</h3>
+                <% movies.forEach(movie => { %>
+                    <div class="result-item">
+                        <a href="movie/<%= movie.movie_id %>">
+                            <img src="<%= movie.img_url %>" alt="<%= movie.movie_name %>">
+                        </a>
+                        <div class="info">
+                            <span class="title"><%= movie.movie_name %></span>
+                            <span class="meta"><%= movie.release_year %> | <%= movie.actors %></span>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+
+            
+        </div>
     </div>
 </body>
