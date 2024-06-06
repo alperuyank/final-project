@@ -253,26 +253,26 @@ body {
   width: 80%;
   margin: 0 auto;
   padding-top: 20px;
+  color: #fff;
 }
 
 .movie-header {
   display: flex;
   flex-wrap: wrap;
-  /* Allow items to wrap */
   align-items: flex-start;
   border-bottom: 1px solid #ccc;
   padding-bottom: 20px;
 }
 
 .movie-header img {
-  max-width: 400px;
+  width: 500px;
+  height: 800px;
   margin-right: 20px;
 }
 
 .movie-header .info {
-  max-width: 600px;
+  max-width: 100%;
   flex: 1;
-  /* Allow info to take remaining space */
 }
 
 .movie-header .info h1 {
@@ -305,6 +305,91 @@ body {
   padding: 10px 20px;
   margin-right: 10px;
   cursor: pointer;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+
+.movie-header .info .buttons button:hover {
+  background-color: #555;
+}
+
+.iframe-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+}
+
+.iframe-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.comments-section {
+  margin-top: 40px;
+}
+
+.comments-section h2 {
+  border-left: 5px solid #ffc107;
+  padding-left: 10px;
+  color: #fff;
+}
+
+.comments-section form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.comments-section form label {
+  margin-top: 10px;
+  color: #fff;
+}
+
+.comments-section form input,
+.comments-section form textarea {
+  margin-top: 5px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.comments-section form button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+
+.comments-section form button:hover {
+  background-color: #555;
+}
+
+.comments-list {
+  margin-top: 20px;
+}
+
+.comment {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.comment p {
+  margin: 5px 0;
+}
+
+.comment strong {
+  color: #ffc107;
 }
 
 /* Responsive styles */
@@ -433,14 +518,31 @@ body {
     cursor: pointer;
   }
 
-  .movie-header .info h1 {
-    font-size: 1.5em;
+
+  .movie-header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .movie-header img {
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .movie-header .info {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .movie-header .info .buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .movie-header .info .buttons button {
-    padding: 8px 16px;
+    margin-bottom: 10px;
   }
-
 }
 
 @media (max-width: 1024px) {
@@ -469,3 +571,5 @@ body {
     font-size: 1.75em;
   }
 }
+
+

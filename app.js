@@ -28,11 +28,16 @@ app.use(session({
 
 // Oturum bilgilerini tüm şablonlara gönderin
 app.use((req, res, next) => {
-  res.locals.user = req.session.userId ? { id: req.session.userId } : null;
+  res.locals.user = req.session.userId ? { 
+    id: req.session.userId,
+    username: req.session.username
+  } : null;
   next();
 });
 
 app.use(homeRoutes);
+
+
 
 
 

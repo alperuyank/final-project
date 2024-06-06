@@ -40,18 +40,16 @@
         </div>
         <div class="navbar-right">
             <button class="navbar-pro">
-                <img src="/img/IMDbPro.png" alt="IMDbPro Logo">
+              <img src="/img/IMDbPro.png" alt="IMDbPro Logo">
             </button>
-            <button class="navbar-watchlist">Watchlist</button>
             <% if (!user) { %>
-                <a href="/login"><button class="navbar-signin">Sign In</button></a>
-                <% } else { %>
-                    <% if (user) { %>
-                        <form action="/logout" method="POST">
-                            <button type="submit" class="navbar-signin">Sign Out</button>
-                        </form>
-                        <% } %>
-                            <% } %>
+              <a href="/login"><button class="navbar-signin">Sign In</button></a>
+            <% } else { %>
+              <a href="/watchlist"><button class="navbar-watchlist">Watchlist</button></a>
+              <form action="/logout" method="POST">
+                <button type="submit" class="navbar-signin">Sign Out (<%= user.username %>)</button>
+              </form>
+            <% } %>
                                 <select class="navbar-language">
                                     <option value="en">EN</option>
                                     <option value="tr">TR</option>

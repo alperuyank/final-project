@@ -1,0 +1,97 @@
+<%- include('./partials/header.ejs') %>
+<style>
+    body {
+  font-family: Arial, sans-serif;
+  background-color: #333;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+.watchlist {
+  width: 80%;
+  margin: 0 auto;
+  padding-top: 20px;
+}
+
+.watchlist h1 {
+  border-left: 5px solid #ffc107;
+  padding-left: 10px;
+  color: #fff;
+}
+
+.movies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.movie {
+  background-color: #1a1a1a;
+  padding: 10px;
+  border-radius: 5px;
+  width: 200px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.movie img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.movie .info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.movie .info .title {
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #fff;
+}
+
+.movie .info .meta {
+  font-size: 14px;
+  color: #ccc;
+}
+
+.no-movies {
+  text-align: center;
+  font-size: 18px;
+  color: #ccc;
+}
+
+</style>
+<title>My Watchlist</title>
+<body>
+  <div class="watchlist">
+    <h1>My Watchlist</h1>
+    <% if (watchlist.length > 0) { %>
+      <div class="movies">
+        <% watchlist.forEach(movie => { %>
+          <div class="movie">
+            <a href="/movie/<%= movie.movie_id %>">
+              <img src="<%= movie.img_url %>" alt="<%= movie.movie_name %>">
+              <div class="info">
+                <span class="title"><%= movie.movie_name %></span>
+                <span class="meta"><%= movie.release_year %> | <%= movie.genre %></span>
+              </div>
+            </a>
+          </div>
+        <% }); %>
+      </div>
+    <% } else { %>
+      <p class="no-movies">No movies in your watchlist.</p>
+    <% } %>
+  </div>
+</body>

@@ -1,38 +1,80 @@
 <%- include('./partials/header.ejs') %>
-
-    <body>
-        <div class="movie-detail">
-            <div class="movie-header">
-                <img src="<%= movie.img_url %>" alt="<%= movie.movie_name %>">
-                <div class="info">
-                    <h1>
-                        <%= movie.movie_name %>
-                    </h1>
-                    <p>Year: <%= movie.release_year %>
-                    </p>
-                    <p>Duration: <%= movie.movie_runtime %> Minutes</p>
-                    <p>Genre: <%= movie.genre %>
-                    </p>
-                    <p>Actors: <%= movie.actors %>
-                    </p>
-                    <p>Summary: <%= movie.summary %>
-                    </p>
-                    <div class="rating">
-                        <span>IMDb Rating:</span>
-                        <span>
-                            <%= movie.rating %>
-                        </span>
-                    </div>
-                    <div class="buttons">
-                        <button class="watchlist-btn">+ Watchlist</button>
-                        <% if (movie.trailer_url) { %>
-                            <button class="trailer-btn"
-                                onclick="window.open('<%= movie.trailer_url %>', '_blank')">Trailer</button>
-                            <% } else { %>
-                                <button class="trailer-btn" disabled>No Trailer Available</button>
-                                <% } %>
-                    </div>
-                </div>
-            </div>
+<title><%= movie.movie_name %></title>
+<body>
+  <div class="movie-detail">
+    <div class="movie-header">
+    
+      <img src="<%= movie.img_url %>" alt="<%= movie.movie_name %>">
+      <div class="info">
+        <h1><%= movie.movie_name %></h1>
+        <p>Year: <%= movie.release_year %></p>
+        <p>Duration: <%= movie.movie_runtime %> Minutes</p>
+        <p>Genre: <%= movie.genre %></p>
+        <p>Actors: <%= movie.actors %></p>
+        <p>Summary: <%= movie.summary %></p>
+        <div class="rating">
+          <span>IMDb Rating:</span>
+          <span><%= movie.rating %></span>
         </div>
-    </body>
+        <% if (movie.trailer_url) { %>
+            <div class="iframe-container">
+              <iframe src="<%= movie.trailer_url %>"
+                      title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write;
+                      encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin"
+                      allowfullscreen></iframe>
+            </div>
+          <% } else { %>
+            <button class="trailer-btn" disabled>No Trailer Available</button>
+          <% } %>
+        <div class="buttons">
+          <form action="/watchlist/<%= movie.movie_id %>" method="POST">
+            <button type="submit" class="watchlist-btn">+ Watchlist</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="comments-section">
+      <h2>Comments</h2>
+      <form action="/movie/<%= movie.movie_id %>/comment" method="POST">
+        <label for="rating">Rating (1-10):</label>
+        <input type="number" name="rating" min="1" max="10" required>
+        <label for="comment">Comment:</label>
+        <textarea name="comment" required></textarea>
+        <button type="submit">Submit</button>
+      </form>
+
+      <div class="comments-list">
+        <% if (comments.length > 0) { %>
+          <% comments.forEach(comment => { %>
+            <div class="comment">
+              <p><strong><%= comment.username %></strong> rated it <%= comment.rating %>/10</p>
+              <p><%= comment.comment %></p>
+              <p><em><%= comment.created_at %></em></p>
+            </div>
+          <% }); %>
+        <% } else { %>
+          <p>No comments yet.</p>
+        <% } %>
+      </div>
+    </div>
+  </div>
+
+  <% if (message) { %>
+    <div class="notification">
+      <%= message %>
+    </div>
+  <% } %>
+  <style>
+    .notification {
+      background-color: #4CAF50;
+      color: white;
+      padding: 15px;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      border-radius: 5px;
+    }
+</style>
+</body>
