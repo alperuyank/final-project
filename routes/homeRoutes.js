@@ -4,17 +4,74 @@ const router = express.Router();
 const db = require('../models/db');
 const { ensureLoggedIn, ensureLoggedOut } = require('../public/js/auth'); // Adjust the path to your middleware
 
-//dur artık geri alma
 
-// Use session middleware
-
+function normalize(value, min, max) {
+  return (value - min) / (max - min);
+}
 
 router.get('/', async (req, res) => {
   try {
     const result = await db.query('SELECT * FROM movies;');
-    res.render("index", {
-      movies: result.rows
+    const movies = result.rows;
+
+    // Find min and max values for normalization
+    const minRating = Math.min(...movies.map(movie => movie.rating));
+    const maxRating = Math.max(...movies.map(movie => movie.rating));
+    const minComments = Math.min(...movies.map(movie => movie.comments_count));
+    const maxComments = Math.max(...movies.map(movie => movie.comments_count));
+    const minPageViews = Math.min(...movies.map(movie => movie.page_views));
+    const maxPageViews = Math.max(...movies.map(movie => movie.page_views));
+
+    // Calculate popularity score for each movie
+    movies.forEach(movie => {
+      const normalizedRating = normalize(movie.rating, minRating, maxRating);
+      const normalizedComments = normalize(movie.comments_count, minComments, maxComments);
+      const normalizedPageViews = normalize(movie.page_views, minPageViews, maxPageViews);
+      movie.popularity_score = (normalizedRating + normalizedComments + normalizedPageViews) / 3;
     });
+
+    // Sort movies by popularity score
+    movies.sort((a, b) => b.popularity_score - a.popularity_score);
+
+    res.render('index', {
+      movies
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+// Route to submit a rating
+router.post('/rate/:movieId', async (req, res) => {
+  const movieId = req.params.movieId;
+  const userId = req.session.userId; // Assuming user is logged in and userId is stored in session
+  const { rating } = req.body;
+
+  if (!userId) {
+    return res.status(401).send('You must be logged in to rate a movie');
+  }
+
+  try {
+    // Check if the user has already rated the movie
+    const existingRating = await db.query('SELECT * FROM comments WHERE user_id = $1 AND movie_id = $2', [userId, movieId]);
+
+    if (existingRating.rows.length > 0) {
+      // Update the existing rating
+      await db.query('UPDATE comments SET rating = $1, created_at = NOW() WHERE user_id = $2 AND movie_id = $3', [rating, userId, movieId]);
+    } else {
+      // Insert a new rating
+      await db.query('INSERT INTO comments (user_id, movie_id, rating) VALUES ($1, $2, $3)', [userId, movieId, rating]);
+    }
+
+    // Calculate the new average rating
+    const averageResult = await db.query('SELECT AVG(rating) as avg_rating FROM comments WHERE movie_id = $1', [movieId]);
+    const newAverageRating = parseFloat(averageResult.rows[0].avg_rating).toFixed(1);
+
+    // Update the average rating in the movies table
+    await db.query('UPDATE movies SET rating = $1 WHERE movie_id = $2', [newAverageRating, movieId]);
+
+    res.redirect(`/movie/${movieId}`);
   } catch (err) {
     console.error(err);
     res.status(500).send('Internal Server Error');

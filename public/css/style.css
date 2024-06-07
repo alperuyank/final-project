@@ -234,15 +234,14 @@ body {
   justify-content: space-between;
 }
 
-.watchlist-btn,
-.trailer-btn {
+.watchlist-btn{
   background-color: #333;
   border: none;
   color: #fff;
   padding: 5px;
   border-radius: 3px;
   cursor: pointer;
-  width: 59%;
+  width: 100%;
   font-size: 14px;
 }
 
@@ -266,13 +265,14 @@ body {
 
 .movie-header img {
   width: 500px;
-  height: 800px;
+  height: 700px;
   margin-right: 20px;
 }
 
 .movie-header .info {
   max-width: 100%;
   flex: 1;
+  margin-top: 20px;
 }
 
 .movie-header .info h1 {

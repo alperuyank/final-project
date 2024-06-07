@@ -51,7 +51,6 @@
 
         button {
             border-radius: 20px;
-            border: 1px solid #FF4B2B;
             background-color: #222;
             color: #FFFFFF;
             font-size: 12px;
@@ -138,6 +137,7 @@
         }
 
         @keyframes show {
+
             0%,
             49.99% {
                 opacity: 0;
@@ -167,7 +167,6 @@
         }
 
         .overlay {
-            background: #FF416C;
             background: -webkit-linear-gradient(to right, #ffc93c, #ff9a3c);
             background: linear-gradient(to right, #ff9a3c, #ffc93c);
             background-repeat: no-repeat;
@@ -233,9 +232,64 @@
             width: 40px;
         }
 
+        @media (max-width: 768px) {
+            .container {
+                width: 100%;
+                height: auto;
+                min-height: 600px;
+            }
+
+            .sign-in-container,
+            .sign-up-container {
+                width: 100%;
+                left: 0;
+            }
+
+            .overlay-container {
+                display: none;
+            }
+
+            .overlay {
+                display: none;
+            }
+
+            .mobile-toggle-buttons {
+                display: flex;
+                justify-content: center;
+                margin-bottom: 20px;
+            }
+
+            .mobile-toggle-buttons button {
+                width: 50%;
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            .container.right-panel-active .sign-up-container {
+                transform: translateX(0);
+                opacity: 1;
+                z-index: 2;
+                animation: none;
+            }
+
+            .container.right-panel-active .sign-in-container {
+                transform: translateX(100%);
+                opacity: 0;
+                z-index: 1;
+            }
+
+            .container.right-panel-active .overlay-container {
+                display: none;
+            }
+        }
     </style>
 </head>
+
 <body>
+    <div class="mobile-toggle-buttons">
+        <button id="mobileSignIn">Sign In</button>
+        <button id="mobileSignUp">Sign Up</button>
+    </div>
     <div class="container" id="container">
         <div class="form-container sign-up-container">
             <form action="/register" method="POST">
@@ -263,6 +317,7 @@
                 <input type="email" name="email" placeholder="Email" required />
                 <input type="password" name="password" placeholder="Password" required />
                 <button type="submit">Sign In</button>
+                <a style="font-size: 16px;"href="/">GO TO HOME PAGE</a>
             </form>
         </div>
         <div class="overlay-container">
@@ -280,7 +335,6 @@
             </div>
         </div>
     </div>
-
     <script>
         const signUpButton = document.getElementById('signUp');
         const signInButton = document.getElementById('signIn');
@@ -291,6 +345,18 @@
         });
 
         signInButton.addEventListener('click', () => {
+            container.classList.remove("right-panel-active");
+        });
+
+        // Mobile toggle buttons
+        const mobileSignUpButton = document.getElementById('mobileSignUp');
+        const mobileSignInButton = document.getElementById('mobileSignIn');
+
+        mobileSignUpButton.addEventListener('click', () => {
+            container.classList.add("right-panel-active");
+        });
+
+        mobileSignInButton.addEventListener('click', () => {
             container.classList.remove("right-panel-active");
         });
     </script>
