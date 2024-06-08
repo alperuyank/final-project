@@ -8,11 +8,11 @@ const dbHost = process.env.DB_HOST;
 const dbPort = process.env.DB_PORT;
 
 const pool = new Pool({
-  user: 'postgres',
-  password: '1234',
-  host: 'localhost',
-  database: 'moviedb',
-  port: 8080,
+  user: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT,
 });
 
 module.exports = {
