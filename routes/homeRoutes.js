@@ -1,5 +1,5 @@
 const express = require('express');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const router = express.Router();
 const db = require('../models/db');
 const { ensureLoggedIn, ensureLoggedOut } = require('../public/js/auth'); // Adjust the path to your middleware

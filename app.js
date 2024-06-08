@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const i18n = require('i18n');
 const ejs = require('ejs');
+const PORT = process.env.PORT || 3000;
 
 const homeRoutes = require("./routes/homeRoutes");
 
@@ -42,7 +43,6 @@ app.use(homeRoutes);
 
 
 // Start server
-const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
