@@ -25,6 +25,7 @@ app.use(session({
     secret: 'your_secret_key',
     resave: false,
     saveUninitialized: true,
+    cookie: { secure: false } // Set to true if using HTTPS
 }));
 
 // Oturum bilgilerini tüm şablonlara gönderin
@@ -36,8 +37,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(homeRoutes);
 
+
+app.use(homeRoutes);
 
 
 

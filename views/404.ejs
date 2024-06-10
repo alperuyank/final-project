@@ -1,0 +1,38 @@
+<%- include('./partials/header.ejs') %>
+<title>Error</title>
+<body>
+  <div class="error-page">
+    <h1>Error</h1>
+    <p><%= message %></p>
+    <button onclick="history.back()">Go Back</button>
+  </div>
+  
+  <style>
+    .error-page {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f8d7da;
+      color: #721c24;
+      font-family: Arial, sans-serif;
+    }
+    .error-page h1 {
+      font-size: 3em;
+    }
+    .error-page p {
+      font-size: 1.5em;
+    }
+    .error-page button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #f44336;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+  </style>
+</body>

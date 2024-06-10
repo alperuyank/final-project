@@ -44,39 +44,29 @@
       </div>
 
       <div class="comments-section">
-        <form action="/rate/<%= movie.movie_id %>" method="POST">
+        <form action="/movie/<%= movie.movie_id %>/comment" method="POST">
           <label for="rating">Rate this movie:</label>
           <input type="number" name="rating" min="1" max="10" required>
-          <button type="submit">Submit Rating</button>
-        </form>
-        <h2>Comments</h2>
-        <form action="/movie/<%= movie.movie_id %>/comment" method="POST">
           <label for="comment">Comment:</label>
           <textarea name="comment" required></textarea>
-          <button type="submit">Submit</button>
+          <button type="submit">Submit Rating and Comment</button>
         </form>
-
+        <h2>Comments</h2>
         <div class="comments-list">
-          <% if (comments.length> 0) { %>
-            <% comments.forEach(comment=> { %>
+          <% if (comments.length > 0) { %>
+            <% comments.forEach(comment => { %>
               <div class="comment">
-                <p><strong>
-                    <%= comment.username %>
-                  </strong> rated it <%= comment.rating %>/10</p>
-                <p>
-                  <%= comment.comment %>
-                </p>
-                <p><em>
-                    <%= comment.created_at %>
-                  </em></p>
+                <p><strong><%= comment.username %></strong> rated it <%= comment.rating %>/10</p>
+                <p><%= comment.comment %></p>
+                <p><em><%= comment.created_at %></em></p>
               </div>
-              <% }); %>
-                <% } else { %>
-                  <p>No comments yet.</p>
-                  <% } %>
+            <% }); %>
+          <% } else { %>
+            <p>No comments yet.</p>
+          <% } %>
         </div>
       </div>
-    </div>
+      
 
     <% if (message) { %>
       <div class="notification">
@@ -94,6 +84,10 @@
             right: 20px;
             z-index: 1000;
             border-radius: 5px;
+          }
+
+          .comments-section form {
+            margin-bottom: 20px;
           }
         </style>
   </body>

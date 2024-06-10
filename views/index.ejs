@@ -1,30 +1,32 @@
 <%-include('./partials/header.ejs')%>
 <title>Home</title>
 <body>
-        
-    <div class="top-10-section">
-        <h2>Top 10 on IMDb this week</h2>
-        <div class="owl-carousel owl-theme">
-          <% movies.forEach((movie, index) => { %>
-            <div class="item top-10-item">
-                <a href="/movie/<%= movie.movie_id %>">
-                    <img src="<%= movie.img_url %>" alt="<%= movie.movie_name %>">
-                </a>
-                <div class="info">
-                    <span class="rank">#<%= index + 1 %></span>
-                    <a class="title" style="text-overflow: ellipsis;"><%= movie.movie_name %></a>
-                    <a class="rating"><%= movie.rating %></a>
-                    <div class="buttons">
-                            <form action="/watchlist/<%= movie.movie_id %>" method="POST">
-                              <button type="submit" class="watchlist-btn">+ Watchlist</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            <% }) %>
+  <div class="top-10-section">
+    <select class="navbar-language" style="  color: #fff;
+    background: none;"onchange="location = this.value;">
+      <option value="/change-language/en" <%= lang === 'en' ? 'selected' : '' %>>EN</option>
+      <option value="/change-language/tr" <%= lang === 'tr' ? 'selected' : '' %>>TR</option>
+    </select>
+    <h2><%= translations.top10 %></h2>
+    <div class="owl-carousel owl-theme">
+      <% movies.forEach(movie => { %>
+        <div class="item top-10-item">
+          <a href="/movie/<%= movie.movie_id %>">
+            <img src="<%= movie.img_url %>" alt="<%= movie.movie_name %>">
+          </a>
+          <div class="info">
+            <a class="title" style="text-overflow: ellipsis;"><%= movie.movie_name %></a>
+            <a class="rating"><%= translations.rating %>: <%= movie.rating %></a>
+            <div class="buttons">
+              <form action="/watchlist/<%= movie.movie_id %>" method="POST">
+                <button type="submit" class="watchlist-btn"><%= translations.watchlist %></button>
+              </form>
+            </div>
+          </div>
         </div>
+      <% }) %>
     </div>
-    
+  </div>
     <script>
         $(document).ready(function(){
           $(".owl-carousel").owlCarousel({
